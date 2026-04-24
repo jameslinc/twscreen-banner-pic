@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taiwan Screen Optronics | Panele LCD AUO i rozwiązania wyświetlaczy</title>
+  <meta name="description" content="twscreen.com — panele LCD AUO, rozwiązania dotykowe, wyświetlacze przemysłowe/medyczne/wzmocnione. Szybka wycena (RFQ) i globalna wysyłka." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a33;
+      --text:#eaf0ff;
+      --muted:#b8c4e6;
+      --line:rgba(255,255,255,.12);
+      --accent:#66d9ff;
+      --accent2:#7cffb2;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius:18px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(1000px 600px at 20% 0%, #162651 0%, rgba(22,38,81,0) 60%),
+                      radial-gradient(900px 500px at 85% 20%, #143a2e 0%, rgba(20,58,46,0) 55%),
+                      var(--bg);
+              color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Arial;}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max), calc(100% - 40px)); margin:0 auto;}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,18,32,.68);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;}
+    .logo{
+      width:100px; height:100px; border-radius:80px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      background-image: url("https://jameslinc.github.io/twscreen-demo/logo.jpg");
+      background-size: contain;  /* 等比例縮放 */
+      box-shadow: 0 10px 30px rgba(102,217,255,.18);
+    }
+    .menu{display:flex; gap:18px; align-items:center; flex-wrap:wrap;}
+    .menu a{color:var(--muted); font-size:12px; padding:8px 10px; border-radius:12px;}
+    .menu a:hover{background:rgba(255,255,255,.06); color:var(--text);}
+    .cta{display:flex; gap:10px; align-items:center;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text); font-weight:650; font-size:14px;
+      transition:.15s transform ease, .15s background ease;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background:rgba(255,255,255,.08);}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, rgba(102,217,255,.95), rgba(124,255,178,.9));
+      color:#05101b;
+      box-shadow: 0 18px 60px rgba(102,217,255,.18);
+    }
+    .btn.primary:hover{filter:saturate(1.05)}
+    .hero{padding:58px 0 26px;}
+    .heroGrid{display:grid; grid-template-columns: 1.15fr .85fr; gap:26px; align-items:stretch;}
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--muted); font-size:13px;
+    }
+    .dot{width:9px;height:9px;border-radius:99px;background:var(--accent); box-shadow:0 0 0 6px rgba(102,217,255,.12);}
+    h1{margin:14px 0 10px; font-size:44px; line-height:1.08;}
+    .sub{color:var(--muted); font-size:16px; line-height:1.7; margin:0 0 18px;}
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .miniRow{display:flex; gap:14px; flex-wrap:wrap; margin-top:18px; color:var(--muted); font-size:13px;}
+    .pill{padding:8px 10px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.03);}
+    .heroCard{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 320px;
+    }
+    .heroCard::before{
+      content:"";
+      position:absolute; inset:-120px -160px auto auto;
+      width:360px;height:360px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(102,217,255,.35), rgba(102,217,255,0) 60%);
+      filter: blur(2px);
+    }
+    .heroCard .img{
+      height: 210px;
+      background:
+        linear-gradient(180deg, rgba(11,18,32,0) 0%, rgba(11,18,32,.88) 100%),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=70");
+      background-size:cover; background-position:center;
+    }
+    .heroCard .pad{padding:16px 16px 18px; position:relative;}
+    .statGrid{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:10px;}
+    .stat{
+      border:1px solid var(--line); border-radius:16px; padding:10px 10px;
+      background:rgba(255,255,255,.03);
+    }
+    .stat b{display:block; font-size:16px;}
+    .stat span{color:var(--muted); font-size:12px;}
+    section{padding:52px 0;}
+    .sectionTitle{display:flex; justify-content:space-between; gap:16px; align-items:flex-end; margin-bottom:18px;}
+    .sectionTitle h2{margin:0; font-size:26px;}
+    .sectionTitle p{margin:0;color:var(--muted); max-width:62ch; line-height:1.6;}
+    .grid3{display:grid; grid-template-columns: repeat(3,1fr); gap:14px;}
+    .grid2{display:grid; grid-template-columns: repeat(2,1fr); gap:14px;}
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:16px;
+    }
+    .card h3{margin:0 0 6px; font-size:16px;}
+    .card p{margin:0; color:var(--muted); line-height:1.65; font-size:14px;}
+    .icon{
+      width:38px;height:38px;border-radius:14px;
+      background: rgba(102,217,255,.12);
+      border:1px solid rgba(102,217,255,.25);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:10px;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .gallery{display:grid; grid-template-columns: 1.3fr .7fr; gap:14px;}
+    .gMain,.gSide{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:rgba(255,255,255,.02);
+    }
+    .gMain{min-height:320px; background:
+      linear-gradient(180deg, rgba(11,18,32,.15), rgba(11,18,32,.92)),
+      url("https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1600&q=70");
+      background-size:cover; background-position:center;
+      padding:18px;
+      display:flex; flex-direction:column; justify-content:flex-end;
+    }
+    .gMain b{font-size:18px;}
+    .gMain span{color:var(--muted); margin-top:6px; line-height:1.6;}
+    .gSide{display:grid; grid-template-rows: 1fr 1fr; gap:0;}
+    .gSide .tile{position:relative; min-height:155px;}
+    .gSide .tile:nth-child(1){
+      background: linear-gradient(180deg, rgba(11,18,32,.15), rgba(11,18,32,.92)),
+                  url("https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=1200&q=70");
+      background-size:cover; background-position:center;
+    }
+    .gSide .tile:nth-child(2){
+      background: linear-gradient(180deg, rgba(11,18,32,.15), rgba(11,18,32,.92)),
+                  url("https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&w=1200&q=70");
+      background-size:cover; background-position:center;
+    }
+    form{display:grid; gap:10px;}
+    label{font-size:13px; color:var(--muted);}
+    input, textarea, select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding:12px 12px;
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:120px; resize:vertical;}
+    .row2{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
+    .hint{font-size:12px; color:var(--muted); line-height:1.5;}
+    .footer{
+      padding:26px 0 40px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .muted{color:var(--muted);}
+    @media (max-width: 920px){
+      .heroGrid{grid-template-columns:1fr; }
+      h1{font-size:36px;}
+      .grid3{grid-template-columns:1fr;}
+      .grid2{grid-template-columns:1fr;}
+      .gallery{grid-template-columns:1fr;}
+      .menu{display:none;}
+    }
+    .anchor{scroll-margin-top: 120px;}
+    #contact{scroll-margin-top: 140px;}
+
+  .img-box {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 60vh;           /* 可改 50vh / 70vh */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* 滿版不變形 */
+  display: block;
+}
+
+
+
+  </style>
+</head>
+<body>
+ <div id="top"></div>
+
+
+
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#top">
+    
+        <span class="logo" aria-hidden="true"></span>
+        <span>TWSCREEN</span>
+ 
+      </a>
+      <nav class="menu" aria-label="Primary">
+        <a href="#products">Produkty</a>
+        <a href="#solutions">Rozwiązania</a>
+        <a href="#why">Dlaczego my</a>
+        <a href="#cases">Zastosowania</a>
+        <a href="#rfq">Szybkie RFQ</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+      <div class="cta">
+        <a class="btn" href="#rfq">Szybkie RFQ</a>
+        <a class="btn primary" href="#products">Przeglądaj panele</a>
+      </div>
+    </div>
+  </div>
+
+<!--
+<div class="img-box">
+  <a href="https://www.twscreen.com" target="_blank" rel="noopener">
+    <img src="https://jameslinc.github.io/twscreen-demo/Banner.jpg" alt="TWSCREEN Banner">
+  </a>
+  <span class="badge">台亞光電</span>
+</div>
+-->
+
+<div class="slider" id="bannerSlider">
+  <div style="padding:20px;">Loading banners...</div>
+</div>
+
+
+
+  <main id="top" class="hero">
+    <div class="container heroGrid">
+      <div>
+        <div class="kicker"><span class="dot"></span> Panele LCD AUO • Dotyk / Wzmocnione / Przemysłowe</div>
+        <h1>Stabilny, jasny i niezawodny obraz dla Twojego urządzenia</h1>
+        <p class="sub">
+          Taiwan Screen Optronics (twscreen.com) dostarcza panele LCD AUO oraz zintegrowane rozwiązania wyświetlaczy
+          dla przemysłu, medycyny, transportu, zastosowań zewnętrznych i projektów na zamówienie.
+          Od doboru modelu, przez próbki, aż po dostawy produkcyjne — wszystko w jednym miejscu.
+        </p>
+        <div class="heroActions">
+          <a class="btn primary" href="#rfq">Poproś o wycenę / RFQ</a>
+          <a class="btn" href="#cases">Zobacz zastosowania</a>
+          <a class="btn" href="#contact">Konsultacja specyfikacji</a>
+        </div>
+        <div class="miniRow">
+          <span class="pill">Elastyczne MOQ</span>
+          <span class="pill">Wysyłka globalna</span>
+          <span class="pill">Integracja: dotyk / OCA / bonding / płytki interfejsu</span>
+          <span class="pill">Odpowiedź: 1–2 dni robocze</span>
+        </div>
+      </div>
+
+      <aside class="heroCard" aria-label="Highlights">
+        <div class="img" role="img" aria-label="Tło technologii wyświetlaczy"></div>
+        <div class="pad">
+          <b>Zacznij od wymagań, nie od numeru modelu</b>
+          <div class="muted" style="margin-top:6px; line-height:1.6;">
+            Podaj rozmiar, rozdzielczość, jasność, interfejs, zakres temperatur i scenariusz użycia —
+            dobierzemy pasujące panele oraz zamienniki.
+          </div>
+          <div class="statGrid">
+            <div class="stat"><b>7–32"</b><span>typowy zakres</span></div>
+            <div class="stat"><b>LVDS/eDP</b><span>popularne interfejsy</span></div>
+            <div class="stat"><b>Integracja</b><span>dotyk/bonding/obudowa</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <section id="products" class="anchor">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2>Produkty (dostosuj do swoich kategorii)</h2>
+          <p>Kafelki jak w landing page: pokaż główne linie, a każdą kartę podepnij do istniejących stron produktów lub PDF.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="card">
+          <div class="icon">P</div>
+          <h3>Panele LCD AUO</h3>
+          <p>Przemysłowe, długi cykl dostępności, wiele rozmiarów i rozdzielczości. Dodaj “top modele” i strategię zamienników.</p>
+        </div>
+        <div class="card">
+          <div class="icon">T</div>
+          <h3>Rozwiązania dotykowe</h3>
+          <p>PCAP / rezystancyjne / bonding OCA / szkło osłonowe na zamówienie (EMI, rękawiczki, wodoodporność).</p>
+        </div>
+        <div class="card">
+          <div class="icon">R</div>
+          <h3>Wzmocnione / Outdoor</h3>
+          <p>Wysoka jasność, szeroki zakres temperatur, odporność na wibracje + bonding i powłoki antyodblaskowe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solutions" class="anchor">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2>Rozwiązania</h2>
+          <p>Krótko i konkretnie: 3–6 punktów o tym, co realnie dostarczacie.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="card">
+          <h3>Dobór modelu (BOM / zamienniki)</h3>
+          <p>Na podstawie wymagań (rozmiar, jasność, interfejs, temperatura, ryzyko dostaw) proponujemy listę rekomendacji.</p>
+        </div>
+        <div class="card">
+          <h3>Integracja: dotyk + bonding optyczny</h3>
+          <p>OCA/LOCA, szkło osłonowe i mechanika — mniej odbić, lepsza czytelność na zewnątrz, większa niezawodność.</p>
+        </div>
+        <div class="card">
+          <h3>Od prototypu do produkcji</h3>
+          <p>Szybkie próbki, przejrzysty lead time; wsparcie w standardach testów, pakowaniu i wymaganiach wysyłkowych.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="anchor">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2>Dlaczego TWSCREEN</h2>
+          <p>Budujemy zaufanie: technicznie, przejrzyście i “do wdrożenia”.</p>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Podejście inżynierskie</h3>
+          <p>Najpierw rozumiemy warunki pracy (jasność, temperatura, EMI, żywotność), potem dobieramy komponenty minimalizując ryzyko.</p>
+        </div>
+        <div class="card">
+          <h3>Elastyczny łańcuch dostaw</h3>
+          <p>Gdy występują braki lub EOL, przedstawiamy listę zamienników i różnice w specyfikacji, by ułatwić akceptację wewnętrzną.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases" class="anchor">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2>Zastosowania / Galeria</h2>
+          <p>Wstaw zdjęcia Waszych wdrożeń (przemysł, medycyna, transport, outdoor). To mocno podnosi wiarygodność.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="gMain">
+          <b>Przemysł / Medycyna / Transport</b>
+          <span>Podmień zdjęcia na własne (zalecane 1600px szerokości) i dodaj 1–2 zdania opisu.</span>
+        </div>
+        <div class="gSide" aria-hidden="true">
+          <div class="tile"></div>
+          <div class="tile"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rfq" class="anchor">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2>Szybkie RFQ</h2>
+          <p>Zamiast “rezerwacji”: zbierz parametry w formularzu, a odpowiedź będzie dużo szybsza i trafniejsza.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <form id="rfqForm">
+
+             <div style="max-width:520px; padding:12px; border:1px solid #ccc; border-radius:8px;">
+  <div style="margin:8px 0;">
+    <label>Company</label><br>
+    <input id="company" type="text" placeholder="e.g. ASUS" style="width:100%; padding:8px;">
+  </div>
+
+  <div style="margin:8px 0;">
+    <label>Contact</label><br>
+    <input id="contact" type="text" placeholder="e.g. James" style="width:100%; padding:8px;">
+  </div>
+
+  <div style="margin:8px 0;">
+    <label>Email</label><br>
+    <input id="email" type="email" placeholder="e.g. test@test.com" style="width:100%; padding:8px;">
+  </div>
+
+  <div style="margin:8px 0;">
+    <label>Remark</label><br>
+    <textarea id="remark" placeholder="Your message" style="width:100%; padding:8px; min-height:100px;"></textarea>
+  </div>
+
+  <div style="margin:10px 0; font-size:13px; color:#ccc; line-height:1.6;">
+   <div style="margin:12px 0; font-size:13px; color:#aaa;">
+  <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+    
+    <input type="checkbox" id="agreePrivacy"
+           style="width:16px; height:16px; cursor:pointer;">
+
+    <span>
+      I agree to the
+      <a href="https://jameslinc.github.io/twscreen-demo/privacy.html"
+         target="_blank"
+         style="color:#66d9ff; text-decoration:underline;">
+        Privacy Policy
+      </a>
+    </span>
+
+  </label>
+</div>
+  </div>
+
+  <button type="button" onclick="sendData()" style="padding:10px 16px; cursor:pointer;">
+    Send
+  </button>
+
+  <div id="msg" style="margin-top:12px; color:green;"></div>
+
+</div>
+          
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Czas odpowiedzi i co dostaniesz</h3>
+          <p class="muted" style="margin-top:8px;">
+            Zwykle odpowiadamy w 1–2 dni robocze i dostarczamy:<br>
+            • rekomendowane modele / zamienniki<br>
+            • zestawienie różnic (jasność/interfejs/wymiary/temperatura/dostępność)<br>
+            • lead time i warunki cenowe (zależnie od ilości i dostawy)<br><br>
+            Możesz też napisać bezpośrednio: <b>sales@twscreen.com</b> (podmień na właściwy adres)
+          </p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="#contact">Kontakt</a>
+            <a class="btn" href="https://www.twscreen.com/" target="_blank" rel="noopener">Powrót na stronę główną</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="anchor">
+    <div class="container">
+      <div class="sectionTitle">
+        <div>
+          <h2>Kontakt</h2>
+          <p>Formularz + mapa + dane firmy. Mapę podmień na iframe z Google Maps.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Dane firmy</h3>
+          <p class="muted" style="margin-top:8px; line-height:1.8;">
+            Taiwan Screen Optronics (TWSCREEN)<br>
+            Website: twscreen.com<br>
+            Email: sales@twscreen.com (podmień na właściwy)<br>
+            Tel: +886-xx-xxxx-xxxx (podmień)<br>
+            Address: Taiwan (podmień)<br>
+          </p>
+          <p class="hint" style="margin-top:12px;">
+            Jeśli podasz adres/telefon i linki (LinkedIn itp.), wstawię je na gotowo.
+          </p>
+        </div>
+
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div style="padding:16px;">
+            <h3 style="margin:0 0 10px;">Mapa</h3>
+            <p class="muted" style="margin:0;">Wklej tutaj kod osadzenia (iframe) z Google Maps.</p>
+            <div style="font-size:12px; color:#888; margin-top:10px; line-height:1.6;">
+              This website may use Google Maps. Data may be collected by Google.
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#66d9ff;">Learn more</a>
+            </div>
+          </div>
+          
+         <!--要放入google_map 
+
+ <div style="height:280px; border-top:1px solid var(--line);">
+  <iframe
+    width="100%"
+    height="100%"
+    style="border:0;"
+    loading="lazy"
+    allowfullscreen
+    src="https://www.google.com/maps?q=新北市中和區立德街87號6樓&output=embed">
+  </iframe>
+</div>
+         
+         --> 
+         
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+          © <span id="year"></span> Taiwan Screen Optronics. Wszelkie prawa zastrzeżone. ·
+          <a href="https://jameslinc.github.io/twscreen-demo/privacy.html" target="_blank" rel="noopener" style="color:#66d9ff;">Privacy Policy</a>
+          · <span class="muted">Szablon one-page dla twscreen.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+let currentWebId = 0;
+
+async function sendData() {
+  const company = document.getElementById("company").value.trim();
+  const contact = document.getElementById("contact").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const remark = document.getElementById("remark").value.trim();
+  const msg = document.getElementById("msg");
+  const agree = document.getElementById("agreePrivacy");
+
+  if (!agree || !agree.checked) {
+    msg.style.color = "red";
+    msg.innerText = "Please agree to Privacy Policy first.";
+    return;
+  }
+
+  if (!company || !contact || !email) {
+    msg.style.color = "red";
+    msg.innerText = "Please fill in Company, Contact, and Email.";
+    return;
+  }
+
+  const apiUrl = "https://twscreen-demo-2-api.jameslinc791.workers.dev/insert";
+  const url =
+    apiUrl +
+    "?com=" + encodeURIComponent(company) +
+    "&ctt_person=" + encodeURIComponent(contact) +
+    "&em=" + encodeURIComponent(email) +
+    "&rem=" + encodeURIComponent(remark) +
+    "&web_id=" + encodeURIComponent(currentWebId);
+
+  msg.style.color = "black";
+  msg.innerText = "Sending...";
+
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+
+    if (res.ok && text.includes("INSERT OK")) {
+      msg.style.color = "green";
+      msg.innerText = "Sent successfully! web_id=" + currentWebId;
+
+      document.getElementById("company").value = "";
+      document.getElementById("contact").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("remark").value = "";
+    } else {
+      msg.style.color = "red";
+      msg.innerText = "Send failed: " + text;
+    }
+  } catch (err) {
+    msg.style.color = "red";
+    msg.innerText = "Error: " + err.message;
+  }
+}
+
+
+async function loadWebCont() {
+  if (!currentWebId) return;
+
+  document.querySelectorAll(".db-webcont").forEach(el => el.remove());
+
+  const res = await fetch("https://section.jameslinc791.workers.dev/api/web-cont?web_id=" + encodeURIComponent(currentWebId));
+  const json = await res.json();
+  const data = json.data || [];
+
+  data.forEach((row) => {
+    const secName = (row.section_name || "").trim().replace(/^#/, "");
+    const sec = document.getElementById(secName);
+    if (!sec) return;
+
+    const box = document.createElement("div");
+    box.className = "db-webcont";
+    box.style.marginTop = "12px";
+    box.style.marginBottom = "12px";
+
+    box.innerHTML = row.section_cont || "";
+
+    const container = sec.querySelector(".container") || sec;
+
+    if (secName === "contact") {
+      const grid2 = sec.querySelector(".grid2");
+      if (grid2) {
+        container.insertBefore(box, grid2);
+      } else {
+        container.appendChild(box);
+      }
+    } else {
+      container.appendChild(box);
+    }
+  });
+}
+
+
+async function loadSlides() {
+  const slider = document.getElementById("bannerSlider");
+  const apiUrl = "https://twscreen-demo-slide-banner.jameslinc791.workers.dev/api/slides?web_id=1";
+
+  try {
+    const res = await fetch(apiUrl);
+    const json = await res.json();
+    const data = json.data || [];
+
+    if (!Array.isArray(data) || data.length === 0) {
+      slider.innerHTML = '<div style="padding:20px;">No banners found.</div>';
+      return;
+    }
+
+    currentWebId = Number(data[0].web_id || 0);
+
+    slider.innerHTML = data.map((item, i) => {
+      const href = item.link_url && item.link_url.trim() ? item.link_url.trim() : "#";
+      const target = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener"' : '';
+      const activeClass = i === 0 ? "slide active" : "slide";
+
+      return `
+        <a href="${href}" class="${activeClass}"${target}>
+          <img src="${item.image_url}" alt="Banner ${i + 1}">
+        </a>
+      `;
+    }).join("");
+
+    const slides = slider.querySelectorAll(".slide");
+    let index = 0;
+
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+      }, 5000);
+    }
+
+    await loadWebCont();
+
+  } catch (err) {
+    slider.innerHTML = '<div style="padding:20px;color:red;">Load banners failed: ' + err.message + '</div>';
+  }
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+loadSlides();
+</script>
+
+
+
+ <script>
+  // Smooth scroll
+ 
+    function scrollToAnchor(id) {
+    const el = document.querySelector(id);
+    if (!el) return;
+
+    const topbar = document.querySelector('.topbar');
+    const topbarHeight = topbar ? topbar.offsetHeight : 0;
+
+    const extraOffset = 40; 
+    const y = el.getBoundingClientRect().top + window.pageYOffset - topbarHeight - extraOffset;
+
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (!id || id === "#") return;
+
+      const el = document.querySelector(id);
+      if (el) {
+        e.preventDefault();
+        scrollToAnchor(id);
+        history.replaceState(null, '', id);
+      }
+    });
+  });
+
+  window.addEventListener('load', () => {
+    if (location.hash) {
+      setTimeout(() => {
+        scrollToAnchor(location.hash);
+      }, 100);
+    }
+  });
+
+  function escapeAttr(str) {
+    if (str === null || str === undefined) return "";
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }  
+
+
+</script>
+</body>
+</html>
