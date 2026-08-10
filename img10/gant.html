@@ -1,0 +1,765 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>專案甘特圖</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:
+        Arial,
+        "Microsoft JhengHei",
+        sans-serif;
+    background:#f4f6f8;
+    color:#333;
+}
+
+.page{
+    width:95%;
+    max-width:1500px;
+    margin:30px auto;
+}
+
+h1{
+    margin:0 0 20px 0;
+    font-size:28px;
+}
+
+.gantt-wrapper{
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    overflow:auto;
+}
+
+.gantt{
+    min-width:1200px;
+}
+
+.gantt-header,
+.gantt-row{
+    display:grid;
+
+    grid-template-columns:
+        220px
+        120px
+        110px
+        110px
+        80px
+        1fr;
+
+    min-height:54px;
+}
+
+.gantt-header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#263238;
+    color:white;
+    font-weight:bold;
+}
+
+.cell{
+    padding:12px;
+    border-right:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    display:flex;
+    align-items:center;
+}
+
+.timeline-header{
+    position:relative;
+    height:54px;
+    background:#37474f;
+}
+
+.timeline{
+    position:relative;
+    min-height:54px;
+
+    background-image:
+        linear-gradient(
+            to right,
+            #e5e7eb 1px,
+            transparent 1px
+        );
+
+    background-size:
+        calc(100% / 30) 100%;
+}
+
+.task-bar{
+    position:absolute;
+    top:13px;
+    height:28px;
+    border-radius:5px;
+    color:#fff;
+    font-size:12px;
+    line-height:28px;
+    padding-left:8px;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.task-normal{
+    background:#1976d2;
+}
+
+.task-warning{
+    background:#f57c00;
+}
+
+.task-done{
+    background:#388e3c;
+}
+
+.task-delay{
+    background:#d32f2f;
+}
+
+.progress{
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    background:rgba(255,255,255,.25);
+}
+
+.today-line{
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:red;
+    z-index:5;
+}
+
+.date-labels{
+    display:grid;
+    grid-template-columns:repeat(30,1fr);
+    height:54px;
+}
+
+.date-label{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-right:1px solid rgba(255,255,255,.15);
+    font-size:11px;
+    writing-mode:vertical-rl;
+}
+
+.status{
+    padding:4px 8px;
+    border-radius:15px;
+    font-size:12px;
+    white-space:nowrap;
+}
+
+.status-doing{
+    background:#e3f2fd;
+    color:#1565c0;
+}
+
+.status-done{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+.status-delay{
+    background:#ffebee;
+    color:#c62828;
+}
+
+.status-wait{
+    background:#fff3e0;
+    color:#ef6c00;
+}
+
+@media(max-width:768px){
+
+    .page{
+        width:100%;
+        margin:0;
+    }
+
+    h1{
+        padding:15px;
+        font-size:22px;
+    }
+
+    .gantt-wrapper{
+        border-radius:0;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<h1>專案執行甘特圖</h1>
+
+<div class="gantt-wrapper">
+
+<div class="gantt">
+
+    <div class="gantt-header">
+
+        <div class="cell">
+            工作項目
+        </div>
+
+        <div class="cell">
+            負責人
+        </div>
+
+        <div class="cell">
+            開始日期
+        </div>
+
+        <div class="cell">
+            結束日期
+        </div>
+
+        <div class="cell">
+            完成度
+        </div>
+
+        <div
+            class="timeline-header"
+            id="timelineHeader"
+        ></div>
+
+    </div>
+
+    <div id="ganttBody"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   甘特圖設定
+===================================================== */
+
+const ganttStart =
+    new Date("2026-08-01");
+
+const totalDays = 30;
+
+
+/* =====================================================
+   專案工作資料
+
+   status：
+   normal
+   warning
+   done
+   delay
+===================================================== */
+
+const tasks = [
+
+{
+    name:"設備進場與安裝",
+    owner:"工程部",
+    start:"2026-08-01",
+    end:"2026-08-05",
+    progress:100,
+    status:"done"
+},
+
+{
+    name:"設備驗收",
+    owner:"工程部",
+    start:"2026-08-04",
+    end:"2026-08-08",
+    progress:100,
+    status:"done"
+},
+
+{
+    name:"設備參數調整",
+    owner:"工程部",
+    start:"2026-08-06",
+    end:"2026-08-12",
+    progress:70,
+    status:"normal"
+},
+
+{
+    name:"材料測試",
+    owner:"製程部",
+    start:"2026-08-08",
+    end:"2026-08-15",
+    progress:45,
+    status:"warning"
+},
+
+{
+    name:"OCA 貼合試作",
+    owner:"製程部",
+    start:"2026-08-11",
+    end:"2026-08-18",
+    progress:25,
+    status:"normal"
+},
+
+{
+    name:"良率改善",
+    owner:"研發部",
+    start:"2026-08-16",
+    end:"2026-08-23",
+    progress:10,
+    status:"normal"
+},
+
+{
+    name:"客戶樣品確認",
+    owner:"業務部",
+    start:"2026-08-20",
+    end:"2026-08-26",
+    progress:0,
+    status:"warning"
+},
+
+{
+    name:"最終報告與驗收",
+    owner:"專案部",
+    start:"2026-08-25",
+    end:"2026-08-30",
+    progress:0,
+    status:"normal"
+}
+
+];
+
+
+/* =====================================================
+   日期工具
+===================================================== */
+
+function diffDays(
+    date1,
+    date2
+){
+
+    const oneDay =
+        1000 *
+        60 *
+        60 *
+        24;
+
+    return Math.round(
+        (
+            date2 -
+            date1
+        ) /
+        oneDay
+    );
+
+}
+
+
+/* =====================================================
+   日期 Header
+===================================================== */
+
+function buildHeader(){
+
+    const header =
+        document.getElementById(
+            "timelineHeader"
+        );
+
+    const labels =
+        document.createElement(
+            "div"
+        );
+
+    labels.className =
+        "date-labels";
+
+
+    for(
+        let i = 0;
+        i < totalDays;
+        i++
+    ){
+
+        const date =
+            new Date(
+                ganttStart
+            );
+
+        date.setDate(
+            date.getDate() + i
+        );
+
+
+        const cell =
+            document.createElement(
+                "div"
+            );
+
+        cell.className =
+            "date-label";
+
+        cell.innerHTML =
+            (
+                date.getMonth() + 1
+            ) +
+            "/" +
+            date.getDate();
+
+        labels.appendChild(
+            cell
+        );
+
+    }
+
+    header.appendChild(
+        labels
+    );
+
+}
+
+
+/* =====================================================
+   狀態名稱
+===================================================== */
+
+function getStatusText(
+    task
+){
+
+    if(
+        task.status === "done"
+    ){
+        return "已完成";
+    }
+
+    if(
+        task.status === "delay"
+    ){
+        return "延遲";
+    }
+
+    if(
+        task.progress === 0
+    ){
+        return "待執行";
+    }
+
+    return "進行中";
+
+}
+
+
+/* =====================================================
+   建立甘特圖
+===================================================== */
+
+function buildGantt(){
+
+    const body =
+        document.getElementById(
+            "ganttBody"
+        );
+
+
+    tasks.forEach(
+        task => {
+
+        const row =
+            document.createElement(
+                "div"
+            );
+
+        row.className =
+            "gantt-row";
+
+
+        /* 工作名稱 */
+
+        const name =
+            document.createElement(
+                "div"
+            );
+
+        name.className =
+            "cell";
+
+        name.innerHTML =
+            "<strong>" +
+            task.name +
+            "</strong>";
+
+
+        /* 負責人 */
+
+        const owner =
+            document.createElement(
+                "div"
+            );
+
+        owner.className =
+            "cell";
+
+        owner.textContent =
+            task.owner;
+
+
+        /* 開始日期 */
+
+        const start =
+            document.createElement(
+                "div"
+            );
+
+        start.className =
+            "cell";
+
+        start.textContent =
+            task.start;
+
+
+        /* 結束日期 */
+
+        const end =
+            document.createElement(
+                "div"
+            );
+
+        end.className =
+            "cell";
+
+        end.textContent =
+            task.end;
+
+
+        /* 完成度 */
+
+        const progressCell =
+            document.createElement(
+                "div"
+            );
+
+        progressCell.className =
+            "cell";
+
+        progressCell.textContent =
+            task.progress +
+            "%";
+
+
+        /* Timeline */
+
+        const timeline =
+            document.createElement(
+                "div"
+            );
+
+        timeline.className =
+            "timeline";
+
+
+        const taskStart =
+            new Date(
+                task.start
+            );
+
+        const taskEnd =
+            new Date(
+                task.end
+            );
+
+
+        const startOffset =
+            diffDays(
+                ganttStart,
+                taskStart
+            );
+
+
+        const duration =
+            diffDays(
+                taskStart,
+                taskEnd
+            ) + 1;
+
+
+        const left =
+            (
+                startOffset /
+                totalDays
+            ) *
+            100;
+
+
+        const width =
+            (
+                duration /
+                totalDays
+            ) *
+            100;
+
+
+        const bar =
+            document.createElement(
+                "div"
+            );
+
+        bar.className =
+            "task-bar " +
+            "task-" +
+            task.status;
+
+
+        bar.style.left =
+            left + "%";
+
+        bar.style.width =
+            width + "%";
+
+
+        bar.innerHTML =
+            task.name +
+            " " +
+            task.progress +
+            "%";
+
+
+        const progress =
+            document.createElement(
+                "div"
+            );
+
+        progress.className =
+            "progress";
+
+        progress.style.width =
+            task.progress +
+            "%";
+
+
+        bar.appendChild(
+            progress
+        );
+
+
+        timeline.appendChild(
+            bar
+        );
+
+
+        /* 今天線 */
+
+        const today =
+            new Date();
+
+
+        const todayOffset =
+            diffDays(
+                ganttStart,
+                today
+            );
+
+
+        if(
+            todayOffset >= 0 &&
+            todayOffset <
+            totalDays
+        ){
+
+            const todayLine =
+                document.createElement(
+                    "div"
+                );
+
+            todayLine.className =
+                "today-line";
+
+            todayLine.style.left =
+                (
+                    (
+                        todayOffset /
+                        totalDays
+                    ) *
+                    100
+                ) +
+                "%";
+
+            timeline.appendChild(
+                todayLine
+            );
+
+        }
+
+
+        row.appendChild(
+            name
+        );
+
+        row.appendChild(
+            owner
+        );
+
+        row.appendChild(
+            start
+        );
+
+        row.appendChild(
+            end
+        );
+
+        row.appendChild(
+            progressCell
+        );
+
+        row.appendChild(
+            timeline
+        );
+
+
+        body.appendChild(
+            row
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   啟動
+===================================================== */
+
+buildHeader();
+
+buildGantt();
+
+</script>
+
+</body>
+</html>
+```
